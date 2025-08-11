@@ -11,5 +11,5 @@ function Index() {
       <h3>Welcome Home!</h3>
       <ShadCnTable />
     </div>
-  )
+  )   
 }
