@@ -9,9 +9,17 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as HelloRouteImport } from './routes/hello'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CryptosIndexRouteImport } from './routes/cryptos/index'
+import { Route as CryptosCryptoIdRouteImport } from './routes/cryptos/$cryptoId'
 
+const HelloRoute = HelloRouteImport.update({
+  id: '/hello',
+  path: '/hello',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
@@ -22,35 +30,70 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CryptosIndexRoute = CryptosIndexRouteImport.update({
+  id: '/cryptos/',
+  path: '/cryptos/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CryptosCryptoIdRoute = CryptosCryptoIdRouteImport.update({
+  id: '/cryptos/$cryptoId',
+  path: '/cryptos/$cryptoId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/hello': typeof HelloRoute
+  '/cryptos/$cryptoId': typeof CryptosCryptoIdRoute
+  '/cryptos': typeof CryptosIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/hello': typeof HelloRoute
+  '/cryptos/$cryptoId': typeof CryptosCryptoIdRoute
+  '/cryptos': typeof CryptosIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/hello': typeof HelloRoute
+  '/cryptos/$cryptoId': typeof CryptosCryptoIdRoute
+  '/cryptos/': typeof CryptosIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about'
+  fullPaths: '/' | '/about' | '/hello' | '/cryptos/$cryptoId' | '/cryptos'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about'
-  id: '__root__' | '/' | '/about'
+  to: '/' | '/about' | '/hello' | '/cryptos/$cryptoId' | '/cryptos'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/hello'
+    | '/cryptos/$cryptoId'
+    | '/cryptos/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  HelloRoute: typeof HelloRoute
+  CryptosCryptoIdRoute: typeof CryptosCryptoIdRoute
+  CryptosIndexRoute: typeof CryptosIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/hello': {
+      id: '/hello'
+      path: '/hello'
+      fullPath: '/hello'
+      preLoaderRoute: typeof HelloRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -65,12 +108,29 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cryptos/': {
+      id: '/cryptos/'
+      path: '/cryptos'
+      fullPath: '/cryptos'
+      preLoaderRoute: typeof CryptosIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cryptos/$cryptoId': {
+      id: '/cryptos/$cryptoId'
+      path: '/cryptos/$cryptoId'
+      fullPath: '/cryptos/$cryptoId'
+      preLoaderRoute: typeof CryptosCryptoIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  HelloRoute: HelloRoute,
+  CryptosCryptoIdRoute: CryptosCryptoIdRoute,
+  CryptosIndexRoute: CryptosIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

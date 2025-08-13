@@ -1,7 +1,0 @@
-
-
-const CoinCell = () => {
-    return (
-        ""
-    );
-};

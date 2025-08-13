@@ -1,10 +1,10 @@
 import type { Cryptocurrency } from "../../../types/types";
 
-interface CoinListItemProps {
+interface CryptoListItemProps {
     cryptocurrency: Cryptocurrency;
 }
 
-const CoinListItem = ({ cryptocurrency }: CoinListItemProps) => {
+const CryptoListItem = ({ cryptocurrency }: CryptoListItemProps) => {
     return (
         <tr>
             <td></td>
@@ -12,4 +12,4 @@ const CoinListItem = ({ cryptocurrency }: CoinListItemProps) => {
     );
 };
 
-export default CoinListItem;
+export default CryptoListItem;
