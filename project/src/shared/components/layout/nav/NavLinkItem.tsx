@@ -1,13 +1,14 @@
 import { NavLink } from "react-router-dom";
 
-interface NavLinkItemProps {
+export type NavLinkItemProps = {
     to: string;
     label: string;
+    onClick: () => void;
 };
 
-const NavLinkItem = ({to, label}: NavLinkItemProps) => {
+const NavLinkItem = ({to, label, onClick}: NavLinkItemProps) => {
     return(
-      <NavLink to={to} className={"inline-flex items-center whitespace-nowrap rounded-md px-3 py-1.5 transition hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"}>
+      <NavLink onClick={() => onClick()} to={to} className="text-4xl font-display text-white hover:text-base-400 md:text-base md:font-sans">
         {label}
       </NavLink>  
     );

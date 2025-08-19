@@ -3,6 +3,7 @@ import { useEffect, useState, useCallback } from "react";
 import Text from "@/shared/components/ui/Text";
 import Link from "@/shared/components/ui/Link";
 import Wrapper from "@/shared/components/ui/Wrapper";
+import Button from "../ui/Button";
 
 type NavLink = { href: string; label: string; title?: string; ariaLabel?: string };
 
@@ -92,7 +93,7 @@ export default function BuioNav({
               {brand}
             </Text>
 
-            <button
+            <Button
               id="menu-toggle"
               type="button"
               aria-label="Toggle main menu"
@@ -109,7 +110,7 @@ export default function BuioNav({
               <svg className={["size-6", isOpen ? "inline" : "hidden"].join(" ")} stroke="currentColor" fill="none" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
               </svg>
-            </button>
+            </Button>
           </div>
 
           {/* Nav menu */}
@@ -128,7 +129,7 @@ export default function BuioNav({
               "md:opacity-100 md:pointer-events-auto md:translate-y-0",
             ].join(" ")}
           >
-            <button
+            <Button
               id="menu-close"
               type="button"
               aria-label="Close mobile navigation menu"
@@ -138,9 +139,9 @@ export default function BuioNav({
               <svg className="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
               </svg>
-            </button>
+            </Button>
 
-            <div className="flex h-full w-full list-none flex-col items-center justify-between gap-4 text-center md:ml-auto md:flex-row md:items-center md:justify-center md:text-left">
+            {/* -----NAVLIST----- <div className="flex h-full w-full list-none flex-col items-center justify-between gap-4 text-center md:ml-auto md:flex-row md:items-center md:justify-center md:text-left">
               <div className="flex flex-col gap-4 md:flex-row">
                 {links.map((l) => (
                   <a
@@ -167,7 +168,7 @@ export default function BuioNav({
               >
                 {ctaLabel}
               </Link>
-            </div>
+            </div>*/}
           </nav>
         </div>
       </Wrapper>
